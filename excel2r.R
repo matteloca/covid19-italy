@@ -76,8 +76,12 @@ dfclean <- dfclean %>% filter(Regione != 'Somma Totale') %>%
 
 dfclean %>% filter(Regione %in% c('Emilia Romagna','Lombardia','Veneto')) %>% 
   plot_ly(x = ~ dmy(giorno),y = ~ Tamponi,
-          type = 'scatter',mode = 'marker+scatter',
-          size = ~round(Tamponi/`Totale Positivi`,1),color = ~Regione,
+          type = 'scatter',mode = 'markers+scatter',
+          #   size = ~round(Tamponi/`Totale Positivi`,1),
+          marker = list(
+            size = ~round(Tamponi/`Totale Positivi`,1)
+          ),
+          color = ~Regione,
           hoverinfo = 'text',
           text = ~paste0('</br> Data: ', giorno,
                          '</br> Positivi: ', `Totale Positivi`,
